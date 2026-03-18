@@ -24,12 +24,22 @@
             width: 400px;
             max-width: 95%;
         }
+        .title-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
         h2 { 
-            margin-top: 0; 
+            margin: 0; 
             color: #569cd6; 
-            text-align: center;
             font-weight: bold;
             letter-spacing: 1px;
+        }
+        .title-container svg {
+            width: 40px;
+            height: 40px;
         }
         .input-group { margin-bottom: 15px; }
         label { display: block; margin-bottom: 6px; font-size: 13px; color: #858585; }
@@ -59,22 +69,22 @@
             background: white;
             padding: 20px;
             border-radius: 8px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             margin-top: 20px;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .payload-box {
             margin-top: 15px;
-            background: #111;
+            background: #3c3c3c;
             padding: 10px;
-            border-radius: 4px;
+            border-radius: 6px;
             font-family: 'Cascadia Code', Consolas, monospace;
-            font-size: 12px;
-            color: #4ec9b0;
+            font-size: 12px; 
+            color: white;
             word-break: break-all;
-            border-left: 3px solid #007acc;
+            border: 1px solid #444;
         }
 
         .btn-download {
@@ -96,7 +106,52 @@
 <body>
 
 <div class="container">
-    <h2>BudgetCam QR Generator</h2>
+    <div class="title-container">
+        <h2>BudgetCam QR Generator</h2>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" overflow="visible">
+            <defs>
+              <linearGradient id="red-ray" x1="100%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#ff0000" stop-opacity="0.9" />
+                <stop offset="40%" stop-color="#ff3333" stop-opacity="0.6" />
+                <stop offset="100%" stop-color="#ff0000" stop-opacity="0" />
+              </linearGradient>
+            </defs>
+          
+            <style>
+              .beam {
+                fill: url(#red-ray);
+                transform-origin: 250px -50px; 
+              }
+              
+              .beam-1 { animation: erratic-shine 0.7s linear infinite; }
+              .beam-2 { animation: erratic-shine 1.1s linear infinite; animation-delay: -0.3s; }
+              .beam-3 { animation: erratic-shine 0.9s linear infinite; animation-delay: -0.6s; }
+          
+              @keyframes erratic-shine {
+                0% { opacity: 0.1; transform: rotate(0deg) scale(1); }
+                15% { opacity: 0.9; transform: rotate(3deg) scale(1.02); }
+                25% { opacity: 0.3; transform: rotate(-2deg) scale(0.98); }
+                40% { opacity: 1.0; transform: rotate(5deg) scale(1.05); }
+                55% { opacity: 0.2; transform: rotate(-4deg) scale(0.95); }
+                70% { opacity: 0.8; transform: rotate(1deg) scale(1.01); }
+                85% { opacity: 0.1; transform: rotate(-3deg) scale(0.97); }
+                100% { opacity: 0.5; transform: rotate(0deg) scale(1); }
+              }
+            </style>
+          
+            <rect x="0" y="0" width="200" height="200" fill="#ffffff" rx="12" />
+          
+            <g fill="#222222">
+              <rect x="20" y="20" width="45" height="45" rx="4" /><rect x="27.5" y="27.5" width="30" height="30" fill="#ffffff" rx="2" /><rect x="35" y="35" width="15" height="15" rx="2" />
+              <rect x="135" y="20" width="45" height="45" rx="4" /><rect x="142.5" y="27.5" width="30" height="30" fill="#ffffff" rx="2" /><rect x="150" y="35" width="15" height="15" rx="2" />
+              <rect x="20" y="135" width="45" height="45" rx="4" /><rect x="27.5" y="142.5" width="30" height="30" fill="#ffffff" rx="2" /><rect x="35" y="150" width="15" height="15" rx="2" />
+              <rect x="75" y="20" width="15" height="15" rx="2" /><rect x="100" y="20" width="25" height="15" rx="2" /><rect x="75" y="45" width="30" height="15" rx="2" /><rect x="115" y="45" width="10" height="15" rx="2" /><rect x="20" y="75" width="15" height="15" rx="2" /><rect x="45" y="75" width="30" height="15" rx="2" /><rect x="85" y="75" width="15" height="15" rx="2" /><rect x="110" y="75" width="40" height="15" rx="2" /><rect x="160" y="75" width="20" height="15" rx="2" /><rect x="20" y="100" width="40" height="15" rx="2" /><rect x="70" y="100" width="15" height="15" rx="2" /><rect x="95" y="100" width="25" height="15" rx="2" /><rect x="130" y="100" width="15" height="40" rx="2" /><rect x="155" y="100" width="25" height="15" rx="2" /><rect x="75" y="135" width="15" height="25" rx="2" /><rect x="100" y="135" width="20" height="15" rx="2" /><rect x="155" y="125" width="25" height="15" rx="2" /><rect x="75" y="170" width="45" height="10" rx="2" /><rect x="130" y="150" width="15" height="30" rx="2" /><rect x="155" y="150" width="25" height="30" rx="2" />
+            </g>
+            <g>
+              <polygon class="beam beam-1" points="250,-50 -50,20 -50,120" /><polygon class="beam beam-2" points="250,-50 -50,120 50,250" /><polygon class="beam beam-3" points="250,-50 100,250 250,250" />
+            </g>
+        </svg>
+    </div>
     
     <div class="input-group">
         <label>Wi-Fi Name (SSID)</label>
@@ -124,8 +179,8 @@
 
     <div class="qr-card">
         <canvas id="canvas"></canvas>
-        <button class="btn-download" onclick="downloadQR()">Download PNG</button>
     </div>
+    <button class="btn-download" onclick="downloadQR()">Download PNG</button>
 
     <div class="payload-box" id="preview"></div>
 
