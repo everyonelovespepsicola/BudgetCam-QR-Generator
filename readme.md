@@ -4,9 +4,7 @@ A simple, client-side web tool to generate QR codes for configuring device setti
 
 This tool is particularly useful for many models of cheap, unbranded security cameras that can be purchased on online marketplaces like **Amazon** or **eBay**. These cameras often use a QR code scanning mechanism for their initial network configuration.
 
-<a href="https://everyonelovespepsicola.github.io/BudgetCam-QR-Generator/" style="display: block; background-color: #4CAF50; color: white; padding: 14px; text-align: center; text-decoration: none; font-weight: bold; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Try Me</a>
-
-
+[![Try the QR Generator](https://img.shields.io/badge/Try%20Me-4CAF50?style=for-the-badge)](https://everyonelovespepsicola.github.io/BudgetCam-QR-Generator/)
 
 ## Compatible Camera Brands and Models
 
