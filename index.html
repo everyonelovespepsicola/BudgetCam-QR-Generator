@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BudgetCam QR Generator</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+    <style>
+        body {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #252526;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            width: 400px;
+            max-width: 95%;
+        }
+        h2 { 
+            margin-top: 0; 
+            color: #569cd6; 
+            text-align: center;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+        .input-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 6px; font-size: 13px; color: #858585; }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #3c3c3c;
+            border: 1px solid #444;
+            color: #fff;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+        input:focus { outline: 1px solid #007acc; border-color: transparent; }
+        
+        .slider-container { margin: 25px 0; }
+        input[type="range"] { width: 100%; margin-bottom: 10px; accent-color: #007acc; }
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: #666;
+        }
+        .active-label { color: #ce9178 !important; font-weight: bold; }
+        
+        .qr-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        
+        .payload-box {
+            margin-top: 15px;
+            background: #111;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: 'Cascadia Code', Consolas, monospace;
+            font-size: 12px;
+            color: #4ec9b0;
+            word-break: break-all;
+            border-left: 3px solid #007acc;
+        }
+
+        .btn-download {
+            margin-top: 15px;
+            width: 100%;
+            padding: 12px;
+            background-color: #0e639c;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .btn-download:hover { background-color: #1177bb; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>BudgetCam QR Generator</h2>
+    
+    <div class="input-group">
+        <label>Wi-Fi Name (SSID)</label>
+        <input type="text" id="ssid" value="Home_Network" oninput="update()">
+    </div>
+    
+    <div class="input-group">
+        <label>Password</label>
+        <input type="password" id="pass" value="password123" oninput="update()">
+    </div>
+
+    <div class="input-group">
+        <label>Extra Token (Optional)</label>
+        <input type="text" id="token" value="offline_mode_only" oninput="update()">
+    </div>
+
+    <div class="slider-container">
+        <input type="range" id="syntax" min="0" max="2" value="1" oninput="update()">
+        <div class="slider-labels">
+            <span id="l0">WIFI:S:</span>
+            <span id="l1">JSON</span>
+            <span id="l2">BASE64</span>
+        </div>
+    </div>
+
+    <div class="qr-card">
+        <canvas id="canvas"></canvas>
+        <button class="btn-download" onclick="downloadQR()">Download PNG</button>
+    </div>
+
+    <div class="payload-box" id="preview"></div>
+</div>
+
+<script>
+    const qr = new QRious({ element: document.getElementById('canvas'), size: 200, level: 'H' });
+
+    function update() {
+        const s = document.getElementById('ssid').value;
+        const p = document.getElementById('pass').value;
+        const t = document.getElementById('token').value;
+        const mode = document.getElementById('syntax').value;
+        
+        let msg = "";
+        [0,1,2].forEach(i => document.getElementById('l'+i).className = (i == mode ? 'active-label' : ''));
+
+        if(mode == 0) msg = `WIFI:S:${s};T:WPA;P:${p};;`;
+        else if(mode == 1) msg = JSON.stringify({s, p, t});
+        else msg = btoa(JSON.stringify({s, p, t}));
+
+        document.getElementById('preview').innerText = msg;
+        qr.value = msg;
+    }
+
+    function downloadQR() {
+        const link = document.createElement('a');
+        link.download = 'camera-payload.png';
+        link.href = document.getElementById('canvas').toDataURL();
+        link.click();
+    }
+
+    update();
+</script>
+</body>
+</html>
