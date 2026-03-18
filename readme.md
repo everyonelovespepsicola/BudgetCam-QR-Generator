@@ -60,7 +60,7 @@ Well-known brands that often use QR code setup include:
 
 1.  Open the `index.html` file in any modern web browser.
 2.  Enter your **Wi-Fi Name (SSID)** and **Password** into the respective fields.
-3.  If your camera requires an additional configuration token, enter it in the **Extra Token** field.
+3.  If your camera requires an additional configuration token, enter it in the **Extra Token** field. Some cameras use this for settings like "offline mode." **If a token is required by your device, this field should not be left blank.**
 4.  Use the slider to select the payload format that your camera requires. If you are unsure, the standard `WIFI:S:` format or `JSON` are common choices.
 5.  The QR code will be generated on the screen. You can now scan this directly with your camera during its setup process.
 6.  Alternatively, click the **Download PNG** button to save the QR code as an image file. You can then display this image on a phone, tablet, or monitor for the camera to scan.

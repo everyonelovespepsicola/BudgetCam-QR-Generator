@@ -28,7 +28,7 @@
             margin-top: 0; 
             color: #569cd6; 
             text-align: center;
-            font-weight: 300;
+            font-weight: bold;
             letter-spacing: 1px;
         }
         .input-group { margin-bottom: 15px; }
@@ -90,6 +90,7 @@
             transition: background 0.2s;
         }
         .btn-download:hover { background-color: #1177bb; }
+
     </style>
 </head>
 <body>
@@ -108,7 +109,7 @@
     </div>
 
     <div class="input-group">
-        <label>Extra Token (Optional)</label>
+        <label for="token">Extra Token (If required, should not be blank)</label>
         <input type="text" id="token" value="offline_mode_only" oninput="update()">
     </div>
 
@@ -127,6 +128,7 @@
     </div>
 
     <div class="payload-box" id="preview"></div>
+
 </div>
 
 <script>
